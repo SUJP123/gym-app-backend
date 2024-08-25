@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+.env
+/src/main/java/com/collegeproject/gymappbackend/config/PropertyReader.java
+SQL_Queries
