@@ -2,6 +2,7 @@ package com.collegeproject.gymappbackend.workout;
 
 import com.collegeproject.gymappbackend.exercise.Exercise;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,21 +22,19 @@ public class Workout {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID workoutId;
 
+    @NotBlank
     private String name;
 
-    @ElementCollection
-    private List<UUID> exerciseIds;
-
+    @NotBlank
     private UUID userId;
 
     public Workout() {
         super();
     }
 
-    public Workout(UUID workoutId, String name, List<UUID> exerciseIds, UUID userId) {
+    public Workout(UUID workoutId, String name, UUID userId) {
         this.workoutId = workoutId;
         this.name = name;
-        this.exerciseIds = exerciseIds;
         this.userId = userId;
     }
 }

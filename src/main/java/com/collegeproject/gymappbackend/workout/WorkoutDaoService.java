@@ -16,11 +16,19 @@ public class WorkoutDaoService implements WorkoutDao{
 
 
     @Override
-    public int insertWorkout(UUID workoutId, String name, List<UUID> exerciseIds, UUID userId) {
+    public int insertWorkout(UUID workoutId, String name, UUID userId) {
         if (workoutId == null) {
             workoutId = UUID.randomUUID();
         }
-        String sql = "INSERT workout_id, name, exercise_ids, user_id INTO workouts (?, ?, ?, ?)";
+        System.out.println(userId);
+        String sql = "INSERT INTO workouts (workout_id, name, user_id) VALUES (?, ?, ?)";
+        return jdbcTemplate.update(sql, workoutId, name, userId);
+    }
+
+    @Override
+    public int addExerciseToWorkout(Exercise exercise, UUID workoutId) {
+        final String sql = "UPDATE exercise SET workout_id = " + workoutId
+                + " WHERE exercise_id = " + exercise.getExerciseId();
         return jdbcTemplate.update(sql);
     }
 

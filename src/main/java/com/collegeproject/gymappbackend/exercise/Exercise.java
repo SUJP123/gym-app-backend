@@ -33,7 +33,8 @@ public class Exercise {
         super();
     }
 
-    public Exercise(String name, Integer sets, Integer reps, Integer rest, UUID workoutId) {
+    public Exercise(UUID exerciseId, String name, Integer sets, Integer reps, Integer rest, UUID workoutId) {
+        this.exerciseId = exerciseId;
         this.name = name;
         this.sets = sets;
         this.reps = reps;

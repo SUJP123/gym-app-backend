@@ -7,12 +7,16 @@ import java.util.UUID;
 
 public interface WorkoutDao {
 
-    int insertWorkout(UUID workoutId, String name, List<UUID> exerciseIds, UUID userId);
+    int insertWorkout(UUID workoutId, String name, UUID userId);
 
     default int insertWorkout(Workout workout) {
         UUID id = UUID.randomUUID();
-        return insertWorkout(id, workout.getName(), workout.getExerciseIds(), workout.getUserId());
+        return insertWorkout(id, workout.getName(), workout.getUserId());
     }
 
+    int addExerciseToWorkout(Exercise exercise, UUID workoutId);
+
     List<Exercise> getAllExercisesByWorkoutId();
+
+
 }
