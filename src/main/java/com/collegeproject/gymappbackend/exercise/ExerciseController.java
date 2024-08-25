@@ -1,5 +1,7 @@
 package com.collegeproject.gymappbackend.exercise;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +15,8 @@ public class ExerciseController {
         this.exerciseService = exerciseService;
     }
 
-    public int addExercise(Exercise exercise) {
+    @PostMapping
+    public int addExercise(@RequestBody Exercise exercise) {
         return exerciseService.addExercise(exercise);
     }
 

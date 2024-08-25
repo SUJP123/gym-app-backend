@@ -20,7 +20,7 @@ public class ExerciseDaoService implements ExerciseDao{
         if (exerciseId == null) {
             exerciseId = UUID.randomUUID();
         }
-        String sql = "INSERT exercise_id, name, sets, reps, rest, workout_id INTO exercise (?, ?, ?, ?, ?, ?)";
-        return jdbcTemplate.update(sql);
+        String sql = "INSERT INTO exercise (exercise_id, name, sets, reps, rest, workout_id) VALUES (?, ?, ?, ?, ?, ?)";
+        return jdbcTemplate.update(sql, exerciseId, name, sets, reps, rest, workoutId);
     }
 }
