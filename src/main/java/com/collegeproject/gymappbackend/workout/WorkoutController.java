@@ -3,6 +3,7 @@ package com.collegeproject.gymappbackend.workout;
 import com.collegeproject.gymappbackend.exercise.Exercise;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -23,5 +24,10 @@ public class WorkoutController {
     @PostMapping("/exercise/{workoutId}")
     public int addExerciseToWorkout(@RequestBody Exercise exercise, @PathVariable("workoutId") UUID workoutId) {
         return workoutService.addExerciseToWorkout(exercise, workoutId);
+    }
+
+    @GetMapping("/{workoutId}")
+    public List<Exercise> findExercisesForWorkout(@PathVariable("workoutId") UUID workoutId) {
+        return workoutService.findExercisesForWorkout(workoutId);
     }
 }

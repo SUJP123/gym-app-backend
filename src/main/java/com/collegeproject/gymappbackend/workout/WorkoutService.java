@@ -4,6 +4,7 @@ import com.collegeproject.gymappbackend.exercise.Exercise;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -21,5 +22,9 @@ public class WorkoutService {
 
     public int addExerciseToWorkout(Exercise exercise, UUID workoutId) {
         return workoutDao.addExerciseToWorkout(exercise, workoutId);
+    }
+
+    public List<Exercise> findExercisesForWorkout(UUID workoutId) {
+        return workoutDao.getAllExercisesByWorkoutId(workoutId);
     }
 }

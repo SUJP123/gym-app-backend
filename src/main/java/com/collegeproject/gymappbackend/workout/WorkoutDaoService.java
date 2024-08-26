@@ -4,6 +4,7 @@ import com.collegeproject.gymappbackend.exercise.Exercise;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,7 +34,15 @@ public class WorkoutDaoService implements WorkoutDao{
     }
 
     @Override
-    public List<Exercise> getAllExercisesByWorkoutId() {
-        return null;
+    public List<Exercise> getAllExercisesByWorkoutId(UUID workoutId) {
+        final String sql = "SELECT * FROM exercise WHERE workout_id = ?";
+        return jdbcTemplate.query(sql, new Object[]{workoutId}, (resultSet, i) -> {
+            UUID exerciseId = UUID.fromString(resultSet.getString("exercise_id"));
+            String name = resultSet.getString("name");
+            Integer sets = Integer.valueOf(resultSet.getString("sets"));
+            Integer reps = Integer.valueOf(resultSet.getString("reps"));
+            Integer rest = Integer.valueOf(resultSet.getString("rest"));
+            return new Exercise(exerciseId, name, sets, reps, rest, workoutId);
+        });
     }
 }
