@@ -19,4 +19,5 @@ public interface WorkoutDao {
     List<Exercise> getAllExercisesByWorkoutId(UUID workoutId);
 
 
+    Workout getWorkoutById(UUID workoutId);
 }

@@ -1,9 +1,11 @@
 package com.collegeproject.gymappbackend.exercise;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.collegeproject.gymappbackend.logged.Logged;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/exercise")
@@ -18,6 +20,17 @@ public class ExerciseController {
     @PostMapping
     public int addExercise(@RequestBody Exercise exercise) {
         return exerciseService.addExercise(exercise);
+    }
+
+    @GetMapping("/{exerciseId}/{date}")
+    public List<Logged> findLoggedFromExerciseIdAndDate(@PathVariable("exerciseId") UUID exerciseId,
+                                                        @PathVariable("date") LocalDate date) {
+        return exerciseService.findLoggedFromExerciseIdAndDate(exerciseId, date);
+    }
+
+    @GetMapping("/{exerciseId}")
+    public Exercise findExerciseById(@PathVariable("exerciseId") UUID exerciseId) {
+        return exerciseService.findExerciseById(exerciseId);
     }
 
 }

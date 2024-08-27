@@ -21,7 +21,6 @@ public class WorkoutDaoService implements WorkoutDao{
         if (workoutId == null) {
             workoutId = UUID.randomUUID();
         }
-        System.out.println(userId);
         String sql = "INSERT INTO workouts (workout_id, name, user_id) VALUES (?, ?, ?)";
         return jdbcTemplate.update(sql, workoutId, name, userId);
     }
@@ -43,6 +42,16 @@ public class WorkoutDaoService implements WorkoutDao{
             Integer reps = Integer.valueOf(resultSet.getString("reps"));
             Integer rest = Integer.valueOf(resultSet.getString("rest"));
             return new Exercise(exerciseId, name, sets, reps, rest, workoutId);
+        });
+    }
+
+    @Override
+    public Workout getWorkoutById(UUID workoutId) {
+        final String sql = "SELECT * FROM workouts WHERE workout_id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{workoutId}, (resultSet, i) -> {
+            String name = resultSet.getString("name");
+            UUID userId = UUID.fromString(resultSet.getString("user_id"));
+            return new Workout(workoutId, name, userId);
         });
     }
 }

@@ -1,7 +1,11 @@
 package com.collegeproject.gymappbackend.user;
 
 
+import com.collegeproject.gymappbackend.workout.Workout;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/user")
@@ -21,6 +25,11 @@ public class UserController {
     @GetMapping("/{email}")
     public User findUserByEmail(@PathVariable("email") String email) {
         return userService.findUserByEmail(email);
+    }
+
+    @GetMapping("/{userId}/workouts")
+    public List<Workout> findUserWorkouts(@PathVariable("userId") UUID userId) {
+        return userService.findUserWorkouts(userId);
     }
 
 }

@@ -27,4 +27,8 @@ public class WorkoutService {
     public List<Exercise> findExercisesForWorkout(UUID workoutId) {
         return workoutDao.getAllExercisesByWorkoutId(workoutId);
     }
+
+    public Workout findWorkoutById(UUID workoutId) {
+        return workoutDao.getWorkoutById(workoutId);
+    }
 }

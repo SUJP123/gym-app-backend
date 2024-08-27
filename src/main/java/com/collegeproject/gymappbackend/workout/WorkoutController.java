@@ -30,4 +30,9 @@ public class WorkoutController {
     public List<Exercise> findExercisesForWorkout(@PathVariable("workoutId") UUID workoutId) {
         return workoutService.findExercisesForWorkout(workoutId);
     }
+
+    @GetMapping("/search/{workoutId}")
+    public Workout findWorkoutById(@PathVariable("workoutId") UUID workoutId) {
+        return workoutService.findWorkoutById(workoutId);
+    }
 }

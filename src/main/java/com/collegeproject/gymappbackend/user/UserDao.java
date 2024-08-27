@@ -1,5 +1,8 @@
 package com.collegeproject.gymappbackend.user;
 
+import com.collegeproject.gymappbackend.workout.Workout;
+
+import java.util.List;
 import java.util.UUID;
 
 public interface UserDao {
@@ -12,4 +15,6 @@ public interface UserDao {
     }
 
     User findUserByEmail(String email);
+
+    List<Workout> getUserWorkouts(UUID userId);
 }
