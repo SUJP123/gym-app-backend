@@ -44,7 +44,7 @@ public class AuthenticationController {
                 .build();
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
-        return new AuthenticationResponse(jwtToken);
+        return new AuthenticationResponse(jwtToken, user.getId());
     }
 
     @PostMapping("/authenticate")
@@ -54,6 +54,7 @@ public class AuthenticationController {
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .userId(user.getId())
                 .build();
     }
 }
